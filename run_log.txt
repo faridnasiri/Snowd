@@ -1,0 +1,194 @@
+====================================================================
+  PCT Section J (WA) â€” GPX-Based Snow Depth Analyzer
+  Snoqualmie Pass (Hwy 90) â†’ Stevens Pass (Hwy 2)
+====================================================================
+Parsing GPX: c:\repos\snowd\COURSE_334291582.gpx
+  8,864 track points  |  total length: 70.43 miles
+  Extracted 71 mile-markers
+  Start: Snoqualmie Pass (Hwy 90)  (47.407447, -121.430052)  3193 ft
+  End:   Stevens Pass (Hwy 2)  (47.732427, -121.084095)  5135 ft
+Saved waypoints â€º c:\repos\snowd\pct_snow\gpx_waypoints.csv
+
+Querying NRCS AWDB for WA SNOTEL stations â€¦
+  Found 226 stations within 70 mi of the trail.
+  Using 20 closest unique stations.
+
+Station                    Triplet          Elev(ft)  Dist(mi)
+--------------------------------------------------------------------
+  Rainy Creek              764:WA:SNTL         4,060       1.0
+  Stevens Pass             791:WA:SNTL         3,940       1.0
+  Grouse Camp              1049:WA:SNTL        4,380       1.7
+  Fish Lake                21B04:WA:SNOW       3,380       2.2
+  Fish Lake                478:WA:SNTL         3,440       2.2
+  Olallie Meadows          672:WA:SNTL         4,010       2.4
+  Tinkham Creek            899:WA:SNTL         3,000       5.5
+  Keechelus                12474000:WA:BOR     2,520       7.2
+  Mount Gardner            898:WA:SNTL         2,930       7.3
+  Mt. Gardner              21B21:WA:SNOW       2,910       7.4
+  Tunnel Avenue            21B08:WA:SNOW       2,490       7.4
+  Keechelus Reservoir Inflow 12474500:WA:USGS    2,440       7.4
+  City Cabin               21B03:WA:SNOW       2,550       7.5
+  Meadows Pass             897:WA:SNTL         3,230       8.8
+  Cedar R nr Cedar Falls   12115000:WA:USGS    1,570       9.5
+  â€¦ and 5 more
+
+Fetching SNOTEL SNWD + WTEQ + TMAX/TMIN â€” chunked bulk API calls per year â€¦
+  2024: 9 stations with SNWD  (9 total records)
+  2025: 9 stations with SNWD  (9 total records)
+  2026: 9 stations with SNWD  (9 total records)
+  9 stations with usable data:
+    Stevens Pass               2024:128d(SNWD,TMAX,TMIN,WTEQ)  2025:128d(SNWD,TMAX,TMIN,WTEQ)  2026:22d(SNWD,TMAX,TMIN,WTEQ)
+    Fish Lake                  2024:128d(SNWD,TMAX,TMIN,WTEQ)  2025:128d(SNWD,TMAX,TMIN,WTEQ)  2026:22d(SNWD,TMAX,TMIN,WTEQ)
+    Olallie Meadows            2024:128d(SNWD,TMAX,TMIN,WTEQ)  2025:128d(SNWD,TMAX,TMIN,WTEQ)  2026:22d(SNWD,TMAX,TMIN,WTEQ)
+    Tinkham Creek              2024:128d(SNWD,TMAX,TMIN,WTEQ)  2025:128d(SNWD,TMAX,TMIN,WTEQ)  2026:22d(SNWD,TMAX,TMIN,WTEQ)
+    Mount Gardner              2024:128d(SNWD,TMAX,TMIN,WTEQ)  2025:128d(SNWD,TMAX,TMIN,WTEQ)  2026:22d(SNWD,TMAX,TMIN,WTEQ)
+    Meadows Pass               2024:128d(SNWD,TMAX,TMIN,WTEQ)  2025:128d(SNWD,TMAX,TMIN,WTEQ)  2026:22d(SNWD,TMAX,TMIN,WTEQ)
+    Sasse Ridge                2024:128d(SNWD,TMAX,TMIN,WTEQ)  2025:128d(SNWD,TMAX,TMIN,WTEQ)  2026:22d(SNWD,TMAX,TMIN,WTEQ)
+    Stampede Pass              2024:128d(SNWD,TMAX,TMIN,WTEQ)  2025:128d(SNWD,TMAX,TMIN,WTEQ)  2026:22d(SNWD,TMAX,TMIN,WTEQ)
+    Stampede Pass              2024:128d(SNWD,TMAX,TMIN,WTEQ)  2025:128d(SNWD,TMAX,TMIN,WTEQ)  2026:22d(SNWD,TMAX,TMIN,WTEQ)
+
+Fetching NWS snow level (snow-line elevation) â€¦
+  Current snow line: 7,475 ft  (at 2026-04-06T00:00)  [Snoqualmie Pass area; single NWS grid cell]
+    2026-04-06T03:00  7,895 ft
+    2026-04-06T06:00  7,953 ft
+    2026-04-06T09:00  7,874 ft
+    2026-04-06T12:00  7,743 ft
+    2026-04-06T15:00  7,533 ft
+    2026-04-06T18:00  7,302 ft
+    2026-04-06T21:00  7,297 ft
+
+Fetching Open-Meteo 16-day forecast at Stevens Pass â€¦
+  Date         Snowfall(cm)  Depth(cm)  Tmax(Â°C)
+  2026-04-06            0.0       2.22       9.9
+  2026-04-07            0.0       2.12      -0.2
+  2026-04-08            0.0       2.09       7.6
+  2026-04-09            0.0        0.0      11.7
+  2026-04-10            0.0        0.0      14.4
+  2026-04-11            0.0        0.0      11.8
+  2026-04-12           1.89       0.04       1.8
+  2026-04-13           1.05       0.05       0.2
+  2026-04-14           1.68       0.06       1.8
+  2026-04-15           1.26        0.1      -0.9
+  2026-04-16            0.0       0.07       4.8
+  2026-04-17            0.0       0.03       6.9
+  2026-04-18           0.21       0.01       4.1
+  2026-04-19           0.42       0.02      -2.8
+  2026-04-20            0.0       0.02       6.6
+  2026-04-21            0.0       0.01       8.6
+
+Building mile-by-mile snow depth table â€¦
+Computing 2026 estimates â€¦
+
+Saved â€º c:\repos\snowd\pct_snow\pct_section_j_snow_depth.csv
+Saved â€º c:\repos\snowd\pct_snow\snow_pivot_2024.csv
+Saved â€º c:\repos\snowd\pct_snow\snow_pivot_2025.csv
+Saved â€º c:\repos\snowd\pct_snow\snow_pivot_2026.csv
+Saved â€º c:\repos\snowd\pct_snow\pct_j_snowfree_2026.csv
+
+Generating charts â€¦
+Saved â€º c:\repos\snowd\pct_snow\pct_j_snow_by_mile.png
+Saved â€º c:\repos\snowd\pct_snow\pct_j_snow_over_time.png
+Saved â€º c:\repos\snowd\pct_snow\pct_j_snowfree_2026.png
+
+====================================================================
+  CURRENT CONDITIONS  (NWS + SNOTEL live readings)
+====================================================================
+  Snow line (NWS, now):        7,475 ft
+  Snow line (NWS, 3-day max):  7,953 ft
+  Stevens Pass SNWD (live):      50 in  (as of 2026-04-05)
+  Stevens Pass SWE  (live):    23.0 in
+  Next snowfall (forecast):  2026-04-12  1.9 cm
+
+====================================================================
+  2026 PROJECTED SNOW-FREE DATES  â€”  PCT Section J
+  Snoqualmie Pass â†’ Stevens Pass  |  threshold â‰¤ 6 in SNWD
+====================================================================
+
+   Mile  Waypoint                          Elev(ft)  Est. Snow-Free
+  -----  --------------------------------  --------  --------------------
+    0.0  Snoqualmie Pass (Hwy 90)             3,193  2026-05-01
+    1.0  Mile 1.0                             3,475  2026-05-01
+    2.0  Mile 2.0                             2,966  2026-05-01
+    3.0  Mile 3.0                             3,314  2026-05-01
+    4.0  Mile 4.0                             3,816  2026-06-01
+    5.0  Gold Lake Bog area                   3,983  2026-06-01
+    6.0  Mile 6.0                             4,604  2026-07-01
+    7.0  Mile 7.0                             4,982  2026-07-01
+    8.0  Mile 8.0                             5,396  >Jul-20
+    9.0  Mile 9.0                             5,460  >Jul-20
+   10.0  Chikamin Peak area                   5,192  >Jul-20
+   11.0  Mile 11.0                            5,368  >Jul-20
+   12.0  Mile 12.0                            5,153  >Jul-20
+   13.0  Mile 13.0                            5,619  >Jul-20
+   14.0  Mile 14.0                            5,783  >Jul-20
+   15.0  Park Lakes Basin                     5,643  >Jul-20
+   16.0  Mile 16.0                            5,425  >Jul-20
+   17.0  Mile 17.0                            4,908  2026-07-01
+   18.0  Mile 18.0                            5,207  >Jul-20
+   19.0  Mile 19.0                            4,540  2026-07-01
+   20.0  Waptus River                         3,963  2026-06-01
+   21.0  Mile 21.0                            3,460  2026-05-01
+   22.0  Mile 22.0                            3,293  2026-05-01
+   23.0  Mile 23.0                            3,224  2026-05-01
+   24.0  Mile 24.0                            3,362  2026-05-01
+   25.0  Deep Lake / Cathedral Pass           3,827  2026-05-24
+   26.0  Mile 26.0                            4,303  2026-06-01
+   27.0  Mile 27.0                            4,791  2026-07-01
+   28.0  Mile 28.0                            5,221  >Jul-20
+   29.0  Mile 29.0                            5,579  >Jul-20
+   30.0  Deception Pass                       5,337  >Jul-20
+   31.0  Mile 31.0                            5,404  >Jul-20
+   32.0  Mile 32.0                            5,035  >Jul-20
+   33.0  Mile 33.0                            4,676  2026-07-01
+   34.0  Mile 34.0                            4,205  2026-06-01
+   35.0  Deception Creek                      3,734  2026-05-10
+   36.0  Mile 36.0                            3,265  2026-05-01
+   37.0  Mile 37.0                            3,021  2026-05-01
+   38.0  Mile 38.0                            3,277  2026-05-01
+   39.0  Mile 39.0                            3,268  2026-05-01
+   40.0  Surprise Lake Jct                    3,378  2026-05-01
+   41.0  Mile 41.0                            3,874  2026-05-11
+   42.0  Mile 42.0                            4,216  2026-06-01
+   43.0  Mile 43.0                            4,417  2026-06-01
+   44.0  Mile 44.0                            4,589  2026-07-01
+   45.0  Trap Pass area                       5,044  >Jul-20
+   46.0  Mile 46.0                            5,462  >Jul-20
+   47.0  Mile 47.0                            5,383  >Jul-20
+   48.0  Mile 48.0                            4,671  2026-07-01
+   49.0  Mile 49.0                            4,345  2026-06-01
+   50.0  Necklace Valley Jct                  3,857  2026-05-11
+   51.0  Mile 51.0                            4,405  2026-06-01
+   52.0  Mile 52.0                            4,449  2026-06-01
+   53.0  Mile 53.0                            4,412  2026-06-01
+   54.0  Mile 54.0                            4,881  2026-07-01
+   55.0  Hope Lake / Mig Lake                 5,056  >Jul-20
+   56.0  Mile 56.0                            5,507  >Jul-20
+   57.0  Mile 57.0                            5,746  >Jul-20
+   58.0  Mile 58.0                            5,153  >Jul-20
+   59.0  Mile 59.0                            4,868  2026-07-01
+   60.0  Cady Pass                            5,009  2026-07-01
+   61.0  Mile 61.0                            5,581  >Jul-20
+   62.0  Mile 62.0                            5,246  >Jul-20
+   63.0  Mile 63.0                            5,111  >Jul-20
+   64.0  Mile 64.0                            4,616  2026-07-01
+   65.0  Lake Valhalla area                   4,656  2026-07-01
+   66.0  Mile 66.0                            4,482  2026-06-01
+   67.0  Mile 67.0                            5,281  >Jul-20
+   68.0  Mile 68.0                            4,867  2026-07-01
+   69.0  Mile 69.0                            4,611  2026-07-01
+   70.4  Stevens Pass (Hwy 2)                 5,135  >Jul-20
+
+All outputs: c:\repos\snowd\pct_snow
+  COURSE_334291582.gpx                               939,117 bytes
+  gpx_waypoints.csv                                    3,311 bytes
+  pct_j_snow_by_mile-old.png                        1,007,721 bytes
+  pct_j_snow_by_mile.png                            1,028,270 bytes
+  pct_j_snow_over_time-old.png                       333,102 bytes
+  pct_j_snow_over_time.png                           335,263 bytes
+  pct_j_snowfree_2026-old.png                        190,473 bytes
+  pct_j_snowfree_2026.csv                              2,804 bytes
+  pct_j_snowfree_2026.png                            193,520 bytes
+  pct_section_j_snow_depth.csv                      2,273,405 bytes
+  snow_pivot_2024.csv                                 45,533 bytes
+  snow_pivot_2025.csv                                 45,468 bytes
+  snow_pivot_2026.csv                                 45,496 bytes
