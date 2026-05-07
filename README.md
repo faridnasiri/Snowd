@@ -4,7 +4,7 @@
 > **For hikers:** Jump straight to the [2026 Snow-Free Date Map](#-2026-snow-free-date-map) below.  
 > **For developers:** See [How to Run](#how-to-run) and [Technical Reference](#technical-reference).
 
-*Data current as of April 6, 2026. Re-run the script to refresh.*
+*Data current as of May 7, 2026. Re-run the script to refresh.*
 
 ---
 
@@ -41,18 +41,18 @@ It pulls real sensor data from up to 20 automated SNOTEL snow stations in the Ce
 
 **The brown silhouette** behind the dots is the terrain elevation profile. Notice how the dots match the terrain — valley crossings (the dips in the silhouette around miles 20–22 and 35–39) are orange, while the ridges that spike up to 5,000–5,900 ft are red or purple.
 
-### 2026 summary at a glance
+### 2026 summary at a glance (as of May 7, 2026)
 
-| Section | Miles | Elevation | Projected clearance |
+| Section | Miles | Elevation | Status |
 |---|---|---|---|
-| Snoqualmie Pass approach | 0–4 | 3,200–3,500 ft | **Early May** |
+| Snoqualmie Pass approach | 0–4 | 3,200–3,800 ft | **Open now** (mi 0–3) · Jun 1 (mi 4) |
 | Chikamin / Park Lakes ridges | 7–17 | 5,000–5,900 ft | **Not clear by Jul 20 (purple)** |
-| Waptus River valley | 20–22 | 3,300–3,500 ft | **Early May** |
-| Cathedral / Deception ridges | 25–32 | 4,800–5,400 ft | **Late June → not clear** |
-| Deception Creek valley | 35–39 | 3,200–3,800 ft | **Early May** |
-| Surprise Lake to Necklace | 40–50 | 3,900–5,000 ft | **May–July** |
-| Hope Lake / Trap Pass ridges | 44–47, 54–58 | 5,000–5,700 ft | **Not clear by Jul 20 (purple)** |
-| Cady Pass to Lake Valhalla | 60–66 | 4,600–5,600 ft | **July → not clear** |
+| Waptus River valley | 20–24 | 3,200–4,000 ft | **Open now** (mi 21–24) · Jun 1 (mi 20) |
+| Cathedral / Deception ridges | 25–32 | 3,800–5,600 ft | **Open now** (mi 25) · Jun 1 → not clear (mi 26–32) |
+| Deception Creek valley | 35–40 | 3,000–3,800 ft | **Open now** (all) |
+| Surprise Lake to Necklace | 41–53 | 3,900–5,000 ft | **Open now** (mi 41, 50) · Jun 1–Jul 1 → not clear |
+| Trap Pass / Hope Lake ridges | 44–47, 54–58 | 5,000–5,700 ft | **Not clear by Jul 20 (purple)** |
+| Cady Pass to Lake Valhalla | 59–66 | 4,500–5,600 ft | Jul 1 (mi 59–60, 64–65) · not clear (mi 61–63, 67) |
 | Stevens Pass | 70.4 | 5,135 ft | **Not clear by Jul 20 (purple)** |
 
 > **What "not clear by Jul 20" means:** The projections only cover through July 20. These miles likely clear sometime in late July or August in a typical year — but that's outside the model's window.
@@ -75,7 +75,7 @@ Within each panel:
 - **Right Y-axis (brown):** Trail elevation in feet
 - **Blue solid line:** 2024 actual data
 - **Green dashed line:** 2025 actual data
-- **Orange dotted line:** 2026 projected (real data through April 6, estimated beyond)
+- **Orange dotted line:** 2026 projected (real data through May 7, estimated beyond)
 - **Brown filled area:** Terrain elevation — notice how the snow lines peak wherever the terrain peaks
 
 ### What the chart shows
@@ -104,7 +104,7 @@ Each of the 4 panels is a **specific trail location**. The X-axis runs from mid-
 
 - **Blue solid:** 2024 (actual)
 - **Green dashed:** 2025 (actual)
-- **Orange dotted:** 2026 (real through April 6, projected beyond)
+- **Orange dotted:** 2026 (real through May 7, projected beyond)
 
 ### What each location shows
 
@@ -166,7 +166,7 @@ All APIs are free with no API key required.
 
 3. **Interpolation** — for each trail mile on each date, snow depth is estimated using **Inverse Distance Weighting** (closer stations have proportionally higher influence) combined with a **seasonal lapse rate** (snow depth increases with elevation at a rate that strengthens through the melt season). A smooth transition zone eliminates the abrupt snow-line cutoff artifacts present in earlier versions.
 
-4. **2026 projection** — real SNOTEL data is used through April 6. Beyond that, a weighted average of 2024 (35%) and 2025 (65%) is used. No trend extrapolation is applied — two years is insufficient.
+4. **2026 projection** — real SNOTEL data is used through May 7. Beyond that, a weighted average of 2024 (35%) and 2025 (65%) is used. No trend extrapolation is applied — two years is insufficient.
 
 5. **Snow-free detection** — a mile is declared snow-free when depth drops below **6 inches and stays there for 5 consecutive days**. The 5-day requirement guards against warm spells followed by late-season refreeze.
 
@@ -189,7 +189,7 @@ All APIs are free with no API key required.
 | Valley crossings (miles 20–23, 35–39) | ±8–15 inches | ±5–10 days |
 | High ridges above 5,000 ft (miles 8–17, 28–32, 55–58) | ±15–30 inches | ±2–4 weeks |
 
-**What the model cannot account for:** wind drifting (adds depth to north-facing bowls), forest canopy (reduces depth under trees), aspect effects (south-facing slopes melt 2–4 weeks earlier), or any significant weather event after April 6, 2026.
+**What the model cannot account for:** wind drifting (adds depth to north-facing bowls), forest canopy (reduces depth under trees), aspect effects (south-facing slopes melt 2–4 weeks earlier), or any significant weather event after May 7, 2026.
 
 ---
 
@@ -215,7 +215,7 @@ c:\repos\snowd\
 
 ---
 
-*Script: `pct_snow_gpx.py` v2 · Data: NRCS SNOTEL + NWS + Open-Meteo · Generated April 6, 2026*
+*Script: `pct_snow_gpx.py` v2 · Data: NRCS SNOTEL + NWS + Open-Meteo · Generated May 7, 2026*
 
 ---
 
@@ -262,7 +262,7 @@ All APIs are **free** and require **no API keys**.
 | Fetch strategy | Chunked: max 15 stations per HTTP call to avoid URL truncation; 3 years × 2 chunks ≈ 6 API calls |
 | Retry | 3 attempts with exponential backoff (2 s, 4 s) on each call |
 
-**Stations used in the April 6, 2026 run (20 closest to trail):**
+**Stations used in the May 7, 2026 run (20 closest to trail):**
 
 | Station | Triplet | Elev (ft) | Dist from trail (mi) |
 |---|---|---|---|
@@ -348,11 +348,11 @@ Monthly snow-line centers: March 2,500 ft · April 3,000 ft · May 3,800 ft · J
 
 ### Step 3 — 2026 Projection
 
-For dates after April 6, 2026, the 2026 value is a weighted average of prior years — no trend extrapolation:
+For dates after May 7, 2026, the 2026 value is a weighted average of prior years — no trend extrapolation:
 
 $$v_{2026} = \max(0.65 \times v_{2025} + 0.35 \times v_{2024},\ 0)$$
 
-For dates through April 6, real SNOTEL data is used directly.
+For dates through May 7, real SNOTEL data is used directly.
 
 ---
 
@@ -363,11 +363,11 @@ For dates through April 6, real SNOTEL data is used directly.
 | Type | Status |
 |---|---|
 | SNOTEL sensor readings 2024 and 2025 | ✅ Physically measured |
-| Real 2026 SNOTEL readings through ~April 6 | ✅ Physically measured |
+| Real 2026 SNOTEL readings through ~May 7 | ✅ Physically measured |
 | NWS snow line — current conditions | ✅ Real-time operational model |
 | Every value on the actual trail | ⚠️ Interpolated — no sensors on the PCT |
 | High-elevation segments (5,000–5,987 ft) | ⚠️ Lapse rate extrapolates above station range (max ~4,380 ft) |
-| 2026 dates after April 6 | ⚠️ Projected from 2024/2025 weighted average |
+| 2026 dates after May 7 | ⚠️ Projected from 2024/2025 weighted average |
 
 ### Expected accuracy by trail segment
 
@@ -382,7 +382,7 @@ For dates through April 6, real SNOTEL data is used directly.
 - **Wind loading and drifting** — north-facing bowls can hold 2× the IDW-predicted depth
 - **Forest canopy** — tree cover reduces snow accumulation under canopy
 - **Aspect effects** — south-facing slopes melt 2–4 weeks earlier than north-facing at the same elevation
-- **Extreme weather events** — a significant storm or heat wave after April 6, 2026 will not be captured in projections
+- **Extreme weather events** — a significant storm or heat wave after May 7, 2026 will not be captured in projections
 - **La Niña / El Niño effects** — 2026 is a La Niña transition year; the weighted average may be optimistic or pessimistic
 
 ### Snow-free date interpretation
@@ -540,4 +540,4 @@ All tunable constants near the top of `pct_snow_gpx.py` (lines 42–72):
 
 ---
 
-*Script: `pct_snow_gpx.py` v2 · Data: NRCS SNOTEL + NWS + Open-Meteo · Generated April 6, 2026*
+*Script: `pct_snow_gpx.py` v2 · Data: NRCS SNOTEL + NWS + Open-Meteo · Generated May 7, 2026*

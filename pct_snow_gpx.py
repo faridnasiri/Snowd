@@ -21,10 +21,10 @@ Outputs (c:\\snow\\pct_snow\\):
 """
 
 import math, os, warnings
+import math
 import xml.etree.ElementTree as ET
 from datetime import date
 
-import numpy  as np
 import pandas as pd
 import requests
 import matplotlib
@@ -414,7 +414,7 @@ def estimate_snow(wp, target_dt, snotel_data, stations, element="SNWD", max_dist
         if not mask.any():
             continue
         raw = float(yr_data[mask].mean())
-        if np.isnan(raw):
+        if math.isnan(raw):
             continue
         dist = haversine_mi(wp["lat"], wp["lon"], st["lat"], st["lon"])
         if dist > max_dist_mi:
@@ -423,10 +423,9 @@ def estimate_snow(wp, target_dt, snotel_data, stations, element="SNWD", max_dist
         weights.append(1.0 / max(dist, 0.5)**2)
         values.append(adj)
     if not values:
-        return np.nan
-    w = np.array(weights)
-    v = np.array(values)
-    return float(np.dot(w, v) / w.sum())
+        return float('nan')
+    total_w = sum(weights)
+    return sum(w * v for w, v in zip(weights, values)) / total_w
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -536,8 +535,8 @@ def main():
                     "Lat":         wp["lat"],
                     "Lon":         wp["lon"],
                     "Elev_ft":     wp["elev_ft"],
-                    "SnowDepth_in": round(est_snwd, 1) if not np.isnan(est_snwd) else None,
-                    "SWE_in":       round(est_wteq, 1) if not np.isnan(est_wteq) else None,
+                    "SnowDepth_in": round(est_snwd, 1) if not math.isnan(est_snwd) else None,
+                    "SWE_in":       round(est_wteq, 1) if not math.isnan(est_wteq) else None,
                 })
     df_hist = pd.DataFrame(rows)
 
@@ -549,9 +548,9 @@ def main():
         hist_index[key] = (row["SnowDepth_in"], row["SWE_in"])
 
     def _lookup(yr, m, d, mile, col_idx):
-        v = hist_index.get((yr, m, d, mile), (np.nan, np.nan))[col_idx]
-        if v is None or (isinstance(v, float) and np.isnan(v)):
-            return np.nan
+        v = hist_index.get((yr, m, d, mile), (float('nan'), float('nan')))[col_idx]
+        if v is None or (isinstance(v, float) and math.isnan(v)):
+            return float('nan')
         return float(v)
 
     # ── 5. 2026 projection ─────────────────────────────────────────────────
@@ -566,39 +565,39 @@ def main():
             if dt.date() <= date.today():
                 real = estimate_snow(wp, dt, snotel_data, fetched_stations)
 
-            if real is not None and not np.isnan(real):
+            if real is not None and not math.isnan(real):
                 v26 = real
             else:
                 v24 = _lookup(2024, m, d, wp["mile"], 0)
                 v25 = _lookup(2025, m, d, wp["mile"], 0)
-                if not np.isnan(v24) and not np.isnan(v25):
+                if not math.isnan(v24) and not math.isnan(v25):
                     # Weighted average (65% recent year / 35% prior year).
                     # No trend extrapolation — two years is insufficient.
                     v26 = max(0.65 * v25 + 0.35 * v24, 0.0)
-                elif not np.isnan(v25):
+                elif not math.isnan(v25):
                     v26 = v25
-                elif not np.isnan(v24):
+                elif not math.isnan(v24):
                     v26 = v24
                 else:
-                    v26 = np.nan
+                    v26 = float('nan')
 
             # WTEQ projection (same logic)
             real_wteq = None
             if dt.date() <= date.today():
                 real_wteq = estimate_snow(wp, dt, snotel_data, fetched_stations, element="WTEQ")
-            if real_wteq is not None and not np.isnan(real_wteq):
+            if real_wteq is not None and not math.isnan(real_wteq):
                 w26 = real_wteq
             else:
                 w24 = _lookup(2024, m, d, wp["mile"], 1)
                 w25 = _lookup(2025, m, d, wp["mile"], 1)
-                if not np.isnan(w24) and not np.isnan(w25):
+                if not math.isnan(w24) and not math.isnan(w25):
                     w26 = max(0.65 * w25 + 0.35 * w24, 0.0)
-                elif not np.isnan(w25):
+                elif not math.isnan(w25):
                     w26 = w25
-                elif not np.isnan(w24):
+                elif not math.isnan(w24):
                     w26 = w24
                 else:
-                    w26 = np.nan
+                    w26 = float('nan')
 
             rows_26.append({
                 "Year":        2026,
@@ -611,8 +610,8 @@ def main():
                 "Lat":         wp["lat"],
                 "Lon":         wp["lon"],
                 "Elev_ft":     wp["elev_ft"],
-                "SnowDepth_in": round(v26, 1) if not np.isnan(v26) else None,
-                "SWE_in":       round(w26, 1) if not np.isnan(w26) else None,
+                "SnowDepth_in": round(v26, 1) if not math.isnan(v26) else None,
+                "SWE_in":       round(w26, 1) if not math.isnan(w26) else None,
             })
 
     df_all = pd.concat([df_hist, pd.DataFrame(rows_26)], ignore_index=True)
@@ -644,7 +643,7 @@ def main():
         for _, row in sub.iterrows():
             sd = row["SnowDepth_in"]
             below = (sd is not None
-                     and not (isinstance(sd, float) and np.isnan(sd))
+                     and not (isinstance(sd, float) and math.isnan(sd))
                      and float(sd) <= THRESHOLD_IN)
             if below:
                 streak += 1
@@ -894,3 +893,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
